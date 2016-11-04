@@ -1,8 +1,9 @@
 "use strict"
 
-var winston = require('winston')
-var restify = require('restify')
-var db = require('./media-database')
+const os = require('os')
+const winston = require('winston')
+const restify = require('restify')
+const db = require('./media-database')
 
 var hostname = os.hostname()
 

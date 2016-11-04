@@ -2,11 +2,11 @@
 
 var errorRate = 20
 
-function shouldReturnError() {
-  return Math.floor(Math.random() * 100) < errorRate
-}
-
 module.exports = {
+  ShouldReturnError: function() {
+    return Math.floor(Math.random() * 100) < errorRate
+  },
+
   SetErrorRate: function (rate) {
     errorRate = rate
     return errorRate
@@ -14,7 +14,7 @@ module.exports = {
 
   CDList: function(callback) {
     setTimeout((callback)=>{
-      if (shouldReturnError()) {
+      if (this.ShouldReturnError()) {
         return callback(new Error("Failed generating CDList"))
       }
 
@@ -29,7 +29,7 @@ module.exports = {
 
   MovieList: function(callback) {
     setTimeout((callback)=>{
-       if (shouldReturnError()) {
+       if (this.ShouldReturnError()) {
         return callback(new Error("Failed generating CDList"))
       }
       callback(null, [
