@@ -17,34 +17,39 @@ Avengers
 The server currently implements the routes:
 
 ### Halt:
+
 ```text
 http://localhost:8080/halt
 ```
 Halts the server
 
 ### Health check:
+
 ```text
 http://localhost:8080/healthcheck
 ```
 Returns 'OK' if the server's up and running.
 
 # Resources
+
 A database wrapper is provided at:
 ```text
 ./media-database
 ```
 
-Supporting asynchronous methods returning CD and Movie lists with the function:
+Supporting asynchronous methods returning CD and Movie lists with the functions:
+
 ```text
 CDList(callback)
 MovieList(callback)
 ```
 
-Both methods will call the callback with the arguments err and array. err will be null if no error was encountered. The list of media will be in the array upon success.
+Both methods will call the callback with the arguments err and array when complete. err will be null if no error was encountered. The list of media will be in the array upon success.
 
-These calls will occasionally fail. Set the failure rate with the function:
+These calls will fail at a rate specified by the function:
+
 ```javascript
-SetErrorRate(int) // some value between 0 and 100
+SetErrorRate(int) // some percentage value between 0 and 100
 ```
 
 # Your Task
