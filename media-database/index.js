@@ -13,7 +13,7 @@ module.exports = {
   },
 
   CDList: function(callback) {
-    setTimeout((callback)=>{
+    setTimeout(()=>{
       if (this.ShouldReturnError()) {
         return callback(new Error("Failed generating CDList"))
       }
@@ -24,11 +24,11 @@ module.exports = {
         "Katy Perry",
         "Beyonce"
       ])
-    }, 500, callback)
+    }, 500)
   },
 
   MovieList: function(callback) {
-    setTimeout((callback)=>{
+    setTimeout(()=>{
        if (this.ShouldReturnError()) {
         return callback(new Error("Failed generating CDList"))
       }
@@ -37,6 +37,6 @@ module.exports = {
         "Ghostbusters",
         "Avengers"
       ])
-    }, 1000, callback)
+    }, 1000)
   }
 }
