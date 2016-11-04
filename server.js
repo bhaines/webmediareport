@@ -1,8 +1,8 @@
 "use strict"
 
-var os = require('os')
 var winston = require('winston')
 var restify = require('restify')
+var db = require('./media-database')
 
 var hostname = os.hostname()
 
@@ -25,33 +25,25 @@ var logger = new (winston.Logger)({
 logger.level = 'debug'
 
 function main() {
-  console.log ()
-}
-
-function mainPrime() {
 
   var server = restify.createServer()
   var port = 8080
 
-  server.get('/', function (req, res, next) {
-    res.send("OK")
-    return next()
-  })
-
   server.get('/healthcheck', function (req, res, next) {
+    logger.info('Health check.')
     res.send('OK')
     return next()
   })
 
   server.get('/halt', function (req, res, next) {
-    res.send('halting')
     logger.info('Halting the server.')
+    res.send('halting')
     process.exit(0)
   })
 
   server.listen(port, function() {
-    logger.debug("Worker Worker server running.")
+    logger.info("Worker Worker server running.")
   })
 }
 
-main();
+main()

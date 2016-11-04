@@ -1,36 +1,42 @@
 "use strict"
-var errorRate = .2
 
-function returnError() {
-  return Math.random() < errorRate
+var errorRate = 20
+
+function shouldReturnError() {
+  return Math.floor(Math.random() * 100) < errorRate
 }
 
-exports = function() {
-  SetErrorRate = function (rate) {
+module.exports = {
+  SetErrorRate: function (rate) {
     errorRate = rate
-  }
+    return errorRate
+  },
 
-  CDList = function(callback) {
-    if (returnError()) {
-      return callback(new Error("Failed generating CDList"))
-    }
+  CDList: function(callback) {
+    setTimeout((callback)=>{
+      if (shouldReturnError()) {
+        return callback(new Error("Failed generating CDList"))
+      }
 
-    callback(null, [
-      "Madonna",
-      "ACDC",
-      "Katy Perry",
-      "Beyonce"
-    ])
-  }
+      callback(null, [
+        "Madonna",
+        "ACDC",
+        "Katy Perry",
+        "Beyonce"
+      ])
+    }, 500, callback)
+  },
 
-  MovieList = function(callback) {
-    if (returnError()) {
-      return callback(new Error("Failed generating CDList"))
-    }
-    callback(null, [
-      "Saving Private Ryan",
-      "Ghostbusters",
-      "Avengers"
-    ])
+  MovieList: function(callback) {
+    setTimeout((callback)=>{
+       if (shouldReturnError()) {
+        return callback(new Error("Failed generating CDList"))
+      }
+      callback(null, [
+        "Saving Private Ryan",
+        "Ghostbusters",
+        "Avengers"
+      ])
+    }, 1000, callback)
   }
 }
