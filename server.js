@@ -3,7 +3,7 @@
 const os = require('os')
 const winston = require('winston')
 const restify = require('restify')
-const db = require('./media-database')
+const mediareport = require('./mediareport.js')
 
 var hostname = os.hostname()
 
@@ -40,6 +40,12 @@ function main() {
     logger.info('Halting the server.')
     res.send('halting')
     process.exit(0)
+  })
+
+  server.get('/mediareport', function (req, res) {
+      mediareport.getReport(function (report) {
+        res.end(report, 'utf-8');
+      });
   })
 
   server.listen(port, function() {
